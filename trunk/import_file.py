@@ -4,11 +4,13 @@ import_file
 import_file is meant to import a python script from a normal file path.
 Relative (dotted) imports are complicated, and fixing sys.path just feels wrong.
 
-Usage examples:
->>>from import_file import import_file
->>>mylib = import_file('c:\\mylib.py')
->>>another = import_file('relative_subdir/another.py')
+Usage examples::
 
+    >>>from import_file import import_file
+    >>>mylib = import_file('c:\\mylib.py')
+    >>>another = import_file('relative_subdir/another.py')
+
+    
 So now you aren't limited to importing only within your package or trail of
 __init__.py files.
 
@@ -38,7 +40,13 @@ def import_file(fpath):
         dst_path = '.'
     
     # remove the .py suffix
-    mod_name = _os.path.basename(fpath)[:-3]
+    script_name = _os.path.basename(fpath)
+    if script_name.endswith('.py'):
+        mod_name = script_name[:-3]
+    else:
+        # Modules without the py extension don't work I believe,
+        # maybe raise an exception?
+        mod_name = script_name
     
     _os.chdir(dst_path)
     fhandle = None
