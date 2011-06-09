@@ -9,7 +9,7 @@ Usage examples::
     >>>from import_file import import_file
     >>>mylib = import_file('c:\\mylib.py')
     >>>another = import_file('relative_subdir/another.py')
-
+    
     
 So now you aren't limited to importing only within your package or trail of
 __init__.py files.
@@ -17,9 +17,11 @@ __init__.py files.
 This should work for python 2.5-3.2 and it's public domain, have fun.
 
 
-ubershmekel at gmail
-http://uberpython.wordpress.com
-
+ - http://uberpython.wordpress.com
+ - http://code.google.com/p/import-file/
+ - http://pypi.python.org/pypi/import_file
+ - ubershmekel at gmail
+ 
 '''
 
 import imp as _imp
@@ -44,8 +46,7 @@ def import_file(fpath):
     if script_name.endswith('.py'):
         mod_name = script_name[:-3]
     else:
-        # Modules without the py extension don't work I believe,
-        # maybe raise an exception?
+        # packages for example.
         mod_name = script_name
     
     _os.chdir(dst_path)
