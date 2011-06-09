@@ -20,15 +20,19 @@ class TestCase(unittest.TestCase):
         finally:
             os.remove(STUB_NAME)
 
-    def testRelativeImports(self):
+    def testRelativeImport(self):
         to_import = STUB_LOC
         stub = import_file(to_import)
         self.assertEqual(stub.A_VAR, 123)
 
-    def testAbsoluteImports(self):
+    def testAbsoluteImport(self):
         to_import = os.path.abspath(STUB_LOC)
         stub = import_file(to_import)
         self.assertEqual(stub.A_VAR, 123)
+        
+    def testPackageImport(self):
+        stub_package = import_file('stub_package')
+        self.assertEqual(stub_package.A_VAR, 123)
 
     def testFails(self):
         self.assertRaises(ImportError, import_file, 'whatever_doesnt_exist')
