@@ -12,7 +12,7 @@ DOCUMENTATION = import_file.__doc__
 
 
 setup(name='import_file',
-      version='1.06',
+      version='1.11',
       description='Import py files using their relative or absolute path.',
       long_description=DOCUMENTATION,
       keywords=['import', 'path', 'file'],
