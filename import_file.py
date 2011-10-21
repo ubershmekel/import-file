@@ -36,7 +36,12 @@ def import_file(fpath):
     
     NOTE: if import_file is called twice with the same module, the module is reloaded.
     '''
-    original_path = _os.path.realpath(_os.path.curdir)
+    if hasattr(_os, 'getcwdu'):
+        # python 2 returns question marks in os.path.realpath for
+        # ascii input (eg '.').
+        original_path = _os.path.realpath(_os.getcwdu())
+    else:
+        original_path = _os.path.realpath(_os.path.curdir)
     dst_path = _os.path.dirname(fpath)
     if dst_path == '':
         dst_path = '.'
